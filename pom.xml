@@ -233,6 +233,8 @@
 								<!-- UnlockCommercialFeatures/FlightRecorder: For Oracle Java commercial use -->
 								<!-- <argument>-XX:+UnlockCommercialFeatures</argument> <argument>-XX:+FlightRecorder</argument> -->
 								<!-- <argument>-agentpath:/root/eclipse/plugins/org.zeroturnaround.eclipse.embedder_7.0.8.RELEASE/jrebel/lib/libjrebel64.so</argument> -->
+								<argument>-javaagent:/opt/contrast/agent/contrast.jar</argument>
+								<argument>-Dcontrast.standalone.appname=EasyBuggy Mod</argument>
 								<argument>-agentlib:jdwp=transport=dt_socket,server=y,address=9009,suspend=n</argument>
 								<argument>-Dderby.stream.error.file=logs/derby.log</argument>
 								<argument>-Dderby.infolog.append=true</argument>
