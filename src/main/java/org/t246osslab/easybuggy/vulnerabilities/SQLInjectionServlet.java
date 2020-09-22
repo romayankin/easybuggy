@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.sql.PreparedStatement;
 import java.util.Locale;
 
 import javax.servlet.ServletException;
@@ -66,8 +67,13 @@ public class SQLInjectionServlet extends AbstractServlet {
         try {
             conn = DBClient.getConnection();
             stmt = conn.createStatement();
-            rs = stmt.executeQuery("SELECT name, secret FROM users WHERE ispublic = 'true' AND name='" + name
-                    + "' AND password='" + password + "'");
+            String query = "SELECT name, secret FROM users WHERE ispublic = 'true' AND name=? AND password = ?";
+
+
+            PreparedStatement pstmt = conn.prepareStatement( query );
+            pstmt.setString( 1, name );
+            pstmt.setString( 2, password );
+            rs = pstmt.executeQuery();
             StringBuilder sb = new StringBuilder();
             while (rs.next()) {
                 sb.append("<tr><td>" + rs.getString("name") + "</td><td>" + rs.getString("secret") + "</td></tr>");
